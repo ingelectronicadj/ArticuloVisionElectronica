@@ -124,7 +124,7 @@
    \thanks%[Correspondence email: 2nd-author@email.org]
           {2}% <-- Affiliation label
           {2nd Author affiliation}
-  Luis Martín Santamaria% <-- Do not erase this percentage symbol
+  \\Luis Martín Santamaria% <-- Do not erase this percentage symbol
   \thanks%[Correspondence email: last-author@email.org]
           {3}% <-- Affiliation label
           {Last Author affiliation}}% (Required)
@@ -166,6 +166,7 @@
 %%----------------------------------------------------------
 %%                ABSTRACT
 %%----------------------------------------------------------
+%\textw
 \vfil
 \noindent
 \Ovalbox{\INGUDAdjustbox
@@ -214,6 +215,12 @@ For the beginning of the year 2017, Renata Szymanska in the Department of Medica
 That same year, the expert vegetable physiologist Shigeharu Shimamura starts an industrial-scale vegetable garden inside a factory in Japan inspired by the earthquake and tsunamis of 2011 that severely affected the Kashiwa area in Chiba prefecture, leaving it without provisions. \\\\
 The garden that covers almost half the size of a football field, is built in a former semiconductor factory of Sony Corporation using only LED lights of special design, subject to strict controls.
 Currently, in Chicago, USA, the company Philips is building a global network of farms to grow indoors vertical vegetables. Green Sense Farms is transforming agriculture by growing vegetables in stacked vertical towers, 365 days a year, thanks to the use of LED luminaires. Their crops are of high quality and consistency \textit{(homogeneity)} since they use computerized, automated controls, which provide the precise amount of light, nutrients, water, temperature and humidity, in order to harvest throughout the year.
+\begin{figure}
+ \begin{center}
+  \includegraphics[width=16cm]{images/refMundialPAR.png}
+   \caption{Status of technology: iot system for the monitoring and control of sources of artificial light applied to precision agriculture.\cite{diegojaviermenaamado2018} }
+  \end{center}
+\end{figure}
 In Colombia, there is little scientific contribution in the field of lighting, colorimetry, radiometry and spectrometry for agriculture, however, it stands out a research by the researcher Lucia Atehortúa of the National University of Colombia, and this experimental research in the Francisco José de Caldas University District \textit{(UDFJC)}, which had as its general objective: ``Design, simulate and implement a modular IoT system for wireless monitoring and control of artificial light sources, capable of stimulating photosynthesis in plants".\cite{UNAL}
 \\\\
 Finally, we approach the reader of this article, with the experimental development of the prototype luminaire capable of storing metrics of spectrometric signatures of any plant genetics, considering that what was sought after the development of prototyping, was a similar system to that provided by Philips, with the connotation of using only free software tools.
@@ -231,12 +238,6 @@ Selecting the right tools for any project visualizing requirements and scalabili
 \subsection{Materials}
 \subsubsection{LED technology for precision agriculture}
 The LZP-00H100 LED emitter incorporates multiple critical wavelengths for proper plants growth. It went on sale at the end of 2016 and is capable of producing a photosynthetic photonic flux value \textit{(PPF)} of up to 106 umole/s; The primary lens of glass and other high quality materials, used in the package, are designed to offer a monumental robustness to challenging environment conditions with high temperature and humidity.
-\begin{figure}
- \begin{center}
-  \includegraphics[width=16cm]{images/ledEngine.png}
-   \caption{Presentation of Led LZP-00H100 and typical relative spectral power versus wavelength $@T_C = 25$~\si{\degreeCelsius}.\cite{ledEngine} }
-  \end{center}
-\end{figure}
 Main features:
 \begin{itemize}
     \item Technology of specific purpose for applications oriented to precision agriculture.
@@ -253,9 +254,22 @@ For considerations of electronic design of the proposed system, some notes of th
     \item Green: \SIrange{520}{530}{\nano\metre} of dominant wavelength.
 \end{itemize}
 In turn, the manufacturer recommends using lenses to increase the homogeneity of the irradiated light, focus or disperse according to the purpose to be considered, conditioning the typical pattern of space radiation of the glass provided by the LED.
+\begin{figure}
+ \begin{center}
+  \includegraphics[width=16cm]{images/ledEngine.png}
+   \caption{Presentation of Led LZP-00H100 and typical relative spectral power versus wavelength $@T_C = 25$~\si{\degreeCelsius}.\cite{ledEngine} }
+  \end{center}
+\end{figure}
 
 \subsubsection{Lenses LLNF-4T11-H}
-This lens family is combined with the LZP family of emitting diodes to ensure high and compact flow density. The lens maximizes the usable lumens in the target area. This lighting solution not only provides the range or distance required for wide lighting applications, but it does so with a beam of high uniformity, eliminating annoying reflections or shadows for plants. Main features of the lens:
+This lens family is combined with the LZP family of emitting diodes to ensure high and compact flow density. The lens maximizes the usable lumens in the target area. This lighting solution not only provides the range or distance required for wide lighting applications, but it does so with a beam of high uniformity, eliminating annoying reflections or shadows for plants. 
+\begin{figure}
+ \begin{center}
+  \includegraphics[width=16cm]{images/lente.png}
+   \caption{Presentation of the lens LLNF-4T11-H. Typical pattern of space radiation of the LED and its correction with lenses. Angular displacement versus relative intensity.\cite{ledEngine} }
+  \end{center}
+\end{figure}
+Main features of the lens:
 \begin{itemize}
     \item Total internal reflection optics provide quality for well-controlled light beams.
     \item Provides excellent uniformity of color and amount of light.
@@ -277,8 +291,7 @@ To reduce the effect or influence of the losses of the LED seen in the form of h
 \subsubsection{Power supply or electrical power}
 Clearly the system in general requires a power supply that allows to energize the components of the power and control circuits necessary for the proper operation of the system in general. For this and thinking about allowing the system to manipulate several luminaire modules, it is decided to acquire the GWS500 source. Some of its most relevant characteristics are:\cite{fuenteDC}
 \begin{itemize}
-    \item High efficiency, up to $93\%$.
-    \item Possible AC input of \SIrange{85}{264}{\volt}.
+    \item High efficiency, up to $93\%$. Possible AC input of \SIrange{85}{264}{\volt}.
     \item It has an internal refrigeration system by convection of \SI{250}{\watt}.
     \item Default output voltage equivalent to \SI{36}{\volt}, but an adjustable range of \SIrange{32}{40}{\volt} can be used.
     \item Maximum current flow equivalent to \SI{7}{\ampere}.
@@ -286,6 +299,11 @@ Clearly the system in general requires a power supply that allows to energize th
 \end{itemize}
 
 \subsubsection{Light sensors}
+\begin{figure}
+ \begin{center}
+  \includegraphics[width=16cm]{images/sensorLuzColor.png}
+   \caption{Presentation of the TCS32xx sensors. Operation diagram and operation curves.\cite{tcs3200} } \end{center}
+\end{figure}
 Commonly called LTF \textit{(Light To Frequency)} devices, perform the functions of light detection, signal conditioning and analog-digital conversion in a monolithic package, capable of converting light to digital signals as a function of frequency. After evaluating the main transducers-light sensors that are commercialized in the market and bearing in mind the range of PAR radiation, programmable devices \textit{(plug and play)} are discarded given their high cost, in addition to not allowing flexibility in terms of electronic design . For this reason, the TCS32xx family of color sensors is considered to be involved in the system since they are easily adaptable sensors to development environments or microcontrollers and their technical specifications cover the needs of the project at low cost. The TCS32xx family of sensors transforms a color signal at a frequency with a polarization of \SIrange{2.7}{5.5}{\volt}, basically filtering the RGB data from a light source and converting it into a square signal with a certain frequency proportional to the composition of irradiated light. Some of its main characteristics by which they are implemented in the system are:
 \begin{itemize}
     \item Typical non-linearity error of $2\%$ over \SI{50}{\kilo\hertz}.
@@ -302,9 +320,14 @@ For greater understanding of this novel functionality, it is suggested to visit 
 \subsubsection{MOSFET Technology}
 Bipolar transistors and MOSFETs handle a similar operating principle. Fundamentally, both types of transistors are controlled charge devices, which means that their output current is proportional to the charge established in the semiconductor by the control electrode. Theoretically, the switching speeds of bipolar and MOSFET devices are almost identical, determined by the time required for load carriers to travel through the semiconductor region. Typical values in power devices are approximately 20 to 200 picoseconds depending on the device.
 The popularity and proliferation of MOSFET technology for digital and power applications is driven by two of its main advantages over bipolar junction transistors. One of these benefits is the ease of use of MOSFET devices in high frequency switching applications. MOSFET transistors are simpler to operate because their control electrode is isolated from the conductive silicon of the current, therefore, no direct current of ON is required. Once the MOSFET transistors are turned on, their drive current is practically zero; In addition, the ability to control load \textit{(energy)} and the storage time in MOSFET transistors is greatly reduced. As a result, MOSFET technology promises to use much simpler and more efficient drive circuits with significant economic benefits compared to bipolar devices.\cite{texasInstrument}
-
 \subsubsection{Simulation of circuits and schematics}
 The HEXFET power MOSFETs employed by International Rectifier use advanced processing techniques to achieve extremely low exposure resistance per area of silicon. This benefit, combined with the fast switching speed and reinforced device design whereby the HEXFET power MOSFETs are well known, provides the designer with an extremely efficient and reliable device to use in a wide variety of applications. The low thermal resistance and the low cost of the device contribute to its wide acceptance throughout the industry.
+\begin{figure}
+ \begin{center}
+  \includegraphics[width=16cm]{images/circuitoDriver.png}
+   \caption{Simulation of the power circuit for a single channel of the 4 available by the LED. Schematic of the control and power circuit. MVP circuit PCB. \cite{wiki}} \end{center}
+\end{figure}
+
 
 %%----------------------------------------------------------
 %%                RESULTS
@@ -312,11 +335,17 @@ The HEXFET power MOSFETs employed by International Rectifier use advanced proces
 \section{Results}
 \subsection{Research results}
 The MVP developed is able to allow the end user full control of the power to be radiated in each of the light controllers, additionally allows you to create files as a logbook that hosts comments on the care of the plants, assigning them as relevant parameters together with the record of the date, time and composition of the color when making a new annotation. The integrity of the information provided by the LTF sensors of the system is attributed to its calibration thanks to the support of the laboratory of electrical and industrial tests of the National University of Colombia, where various measurements were generated to ensure the quality of the device. The laboratory has the necessary conditions to carry out tests, since it is isolated from noise and interference given that the site has conditions of total absence of light, which guarantees quality in the measurements. To do this, an SP-200 spectroradiometer was used to determine the wavelength radiated by the LED and in parallel the same measurements were made with our measurement system based on the TCS32xx sensor family. The SP-200 multifunction spectroradiometer has a versatile design that uses interchangeable accessories to allow the measurement of the spectral brightness, irradiance and luminous flux of a light source. The SP-200 detects which measurement head is connected and automatically changes the units of measurement and calibration files, making it the most versatile and cost-effective spectroradiometer available on the market. Its usability is enhanced by unique features that include an internal white point laser for radiance measurements that projects a circular image onto the device under test. This shows the user the region to be measured and eliminates the hassles of a viewer. The SP-200 also has the ability to simultaneously run up to 16 instruments on a single computer, enabling the capture of many test points for high-performance tasks.\cite{LABE}
-\\\\
+\begin{figure}
+ \begin{center}
+  \includegraphics[width=16cm]{images/interface_data.png}
+   \caption{Samples provided by the SP-200 spectroradiometer. User interface for the MVP. \cite{wiki}} \end{center}
+\end{figure}
 Basically, data were taken varying voltage intensity in power and distance, to achieve greater homogeneity in the data obtained, below are relevant data and graphics generated by the optical spectroscope. The software, in addition to indicating the measured wavelength, shows us the color trend, returning the curve obtained from the color to which it tends.
 Given that the project was developed in a modular way, it is estimated that luminaire arrays will be designed in the near future, with not only four channels for color control \textit{(RGBW)} but twelve channels for color space compositions \textit{(HSV, HSL, CIE XYZ)} increasing the power capacity of the device and its color range in general.
+\\\\\\
 Once a frequency sweep is performed with the taking of different samples of the color in the photosynthetically active radiation spectrum, the response of the TCS32xx sensor family is established for each of the red, green, blue and unfiltered filters, with the In order to establish a mathematical model that allows to describe the most appropriate behavior of the sensor versus the spectroradiometer.
 It was interesting to appreciate that the spectroradiometer interface highlighted curves with an emphasis on the color evaluated and for that reason something similar and dynamic was designed for the monitoring and control interface of the luminaire device.
+
 \subsection{Research future}
 Some researchers attending the IV International Congress of Research and Innovation of Engineering, Science and Food Technology IICTA 2018 where the MVP was presented, raised interests in the digital processing of microscopic images after the effect of different light compositions. \textit{(Chloroplasts and stomata in different plant genetics)} and a new power modulation technique for luminaires called pulse density modulation \textit{(Pulse-Density Modulation vs. the current pulse width modulation technique PWM)}. To learn more about this project, the reader is invited to visit the website \url{https://nympha.asharastudios.com/}
 Acknowledgments to the Center for Scientific Research and Development CIDC for the economic support for this research.
@@ -324,8 +353,7 @@ Acknowledgments to the Center for Scientific Research and Development CIDC for t
 %%                CONCLUSIONS
 %%----------------------------------------------------------
 \section{Conclusions}
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Optimization in agriculture is a challenge in which human survival, like that of other ecosystems, is involved. This project consisted in the use of specific light frequencies that allow specific photosynthetic processes in environments of total or partial absence of natural light. The artificial radiation processes are monitored through an interface that allows the control of frequencies, potnecy and time (photoperiod) to irradiate on the crop; It also allows you to store comments on the care of the plants in log mode, together with all the colorimetric data gathered from the sensors of the device, in real time. With this series of data, the luminaries are regulating their operation, feeding a database with millions of possible scenarios, finding the optimum for each of the situations and leading agriculture in any type of conditions to a sustainable and efficient productivity. Unlike devices in the market, the end user has full control of the system and can adjust its parameters to suit. The sensors used have a typical non-linearity error of 2\% and have been calibrated minutely in the LABE laboratory of optics and electrical tests of the National University of Colombia - Bogotá.
 %%----------------------------------------------------------
 %%                APPENDIXES
 %%----------------------------------------------------------
@@ -342,7 +370,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
 %%                ACKNOWLEDGMENTS
 %%----------------------------------------------------------
 \section*{Acknowledgment}% <-- Please use \section*
-Acknowledgment of your paper.
+We thank the research groups LASER (Automation Laboratory, embedded systems and robotics), GITUD (Telecommunications Research Group of the District University) and CIDC (Scientific Research and Development Center) thank you for the workspaces that they allowed the research to work out much better, in the same way I thank the human talent of the electrical testing laboratory of the National University of Colombia, because thanks to their support, many of the concerns about light and its understanding were solved.
 %%----------------------------------------------------------
 %%                REFERENCES
 %%----------------------------------------------------------
@@ -361,7 +389,7 @@ Acknowledgment of your paper.
                                             % Uncomment if
                                             % you need a photograph
 {Diego Javier Mena Amado}% (Required)
-Electronic engineer, hacker with experience in the development of digital products, passionate about science and technology. Promoter of free software and open design hardware. With great skills to work in a team, lead projects, teach and learn quickly. Honorary member of several research groups at the University of the Francisco José de Caldas District. It has skills for the acquisition, processing, sending, storage, representation and analysis of data. He is currently an electronic designer at Ashara Studios, specialist in developments about the internet of things.
+Electronic engineer with experience in the development of digital products, passionate about science and technology. Promoter of free software and open design hardware. Electronic designer at Ashara Studios, specialist in developments about the internet of things.
 \end{biography}
 \begin{biography}%
 %%[{\includegraphics[width=1in]{photograph}}]%<-- author's photograph
@@ -378,6 +406,6 @@ Biography of second author.
                                             % Uncomment if
                                             % you need a photograph
 {Luis Enrique Martin Santamaria}% (Required)
-Biography of last author.
+Electronic engineer, belonging to the GITUD research group of the Francisco José de Caldas University, with postgraduate studies and research in the areas of automatic and instrumentation.
 \end{biography}
 \end{document}
